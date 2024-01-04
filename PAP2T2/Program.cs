@@ -14,7 +14,20 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
+
+// Ad service to the new class DbInitializer
+builder.Services.AddTransient<DbInitializer>();
+
 var app = builder.Build();
+
+using var scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
+
+var initializer = services.GetRequiredService<DbInitializer>();
+//execute the method Run from the class DbInitializer
+initializer.Run();
+
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

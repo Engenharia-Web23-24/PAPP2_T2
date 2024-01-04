@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using PAP2T2.Models;
 
 namespace PAP2T2.Data
 {
@@ -9,5 +10,8 @@ namespace PAP2T2.Data
             : base(options)
         {
         }
+        public DbSet<UnidadeCurricular> UnidadesCurriculares { get; set; }
+
+        public DbSet<Inscricao> Inscricoes { get; set; }
     }
 }
