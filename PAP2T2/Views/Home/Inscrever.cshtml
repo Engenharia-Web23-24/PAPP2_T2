@@ -1,0 +1,33 @@
+﻿@model PAP2T2.Models.Inscricao
+
+@{
+    ViewData["Title"] = "Inscrever";
+}
+
+<h1>Inscricao</h1>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Inscrever">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UCId" class="control-label"></label>
+                <select asp-for="UCId" class ="form-control" asp-items="ViewBag.UCId"></select>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Inscrever" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Cancelar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

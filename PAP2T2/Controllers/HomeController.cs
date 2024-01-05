@@ -27,7 +27,23 @@ namespace PAP2T2.Controllers
                           Problem("Entity set 'ApplicationDbContext.UnidadesCurriculares'  is null.");
         }
 
- 
+        public IActionResult Inscrever()
+        {
+            ViewData["UCId"] = new SelectList(_context.UnidadesCurriculares, "Codigo", "Nome");
+            return View()
+;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Inscrever(Inscricao inscricao)
+        {
+            inscricao.Ano = DateTime.Now.Year;
+            inscricao.Username = User.Identity.Name;
+            _context.Add(inscricao);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+
+        }
         private bool UnidadeCurricularExists(string id)
         {
           return (_context.UnidadesCurriculares?.Any(e => e.Codigo == id)).GetValueOrDefault();
